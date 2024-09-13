@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haq - Terminal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div id="terminal">
+        <header id="terminal-header">
+            <div class="terminal-button close"></div>
+            <div class="terminal-button minimize"></div>
+            <div class="terminal-button maximize"></div>
+            <span class="terminal-title" style="text-align: center; display: block;">Mohammed Misbahul Haq - Terminal Portfolio</span>
+            <span class="terminal-subtitle">Change Mode</span>
+            <button id="theme-toggle">☀️</button>
+        </header>
+        <main id="terminal-content">
+            <div id="output"></div>
+            <div id="input-line">
+                <span id="prompt">haq@portfolio:~$</span>
+                <input type="text" id="command-input" autofocus>
+            </div>
+        </main>
+    </div>
+    <script src="main.js"></script>
+    <script src="commands.js"></script>
+    <script src="cursor.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</body>
+</html>
