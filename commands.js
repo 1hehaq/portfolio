@@ -136,20 +136,18 @@ function openResume() {
     window.open('#', '_blank');
 }
 
-function showCertificates() {
-    return [
-        "<br>",
-        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://app.kajabi.com/certificates/99a049a9\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#FF5722"></box-icon><span class="social-link-text" style="color: white;">C3SA Premium Edition</span></span>',
-        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/9f6a3d44-80e0-4f5e-b3e0-3529f8eb79a9\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#2196F3"></box-icon><span class="social-link-text" style="color: white;">Cisco Cybersecurity</span></span>',
-        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/3b779d77-0502-4ef9-be72-0829e7369e9b\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#9C27B0"></box-icon><span class="social-link-text" style="color: white;">ISC2 Candidate</span></span>',
-        "<br>"
-    ];
-}
+cert = [
+    "<br>",
+    '<span class="social-link" style="color: #4CAF50; cursor: pointer;" onclick="window.open(\'https://app.kajabi.com/certificates/99a049a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#4CAF50"></box-icon><span class="social-link-text" style="color: white;">C3SA Premium Edition</span></span>',
+    '<span class="social-link" style="color: #2196F3; cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/9f6a3d44-80e0-4f5e-b3e0-3529f8eb79a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#2196F3"></box-icon><span class="social-link-text" style="color: white;">Cisco Cybersecurity</span></span>',
+    '<span class="social-link" style="color: #FFC107; cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/3b779d77-0502-4ef9-be72-0829e7369e9b\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#FFC107"></box-icon><span class="social-link-text" style="color: white;">ISC2 Candidate</span></span>',
+    "<br>"
+];
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = {
         email, twitter, linkedin, instagram, github, facebook,
         whoami, social, systemctl, projects, help, banner,
-        openResume, showCertificates
+        openResume, cert
     };
 }
