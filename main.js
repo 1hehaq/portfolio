@@ -1,25 +1,15 @@
 function showMobileWarning() {
-    if (window.innerWidth < window.innerHeight && window.innerWidth <= 768 && !localStorage.getItem('mobileWarningDismissed')) {
+    if (window.innerWidth <= 768) {
         const warningDiv = document.createElement('div');
         warningDiv.id = 'mobile-warning';
         warningDiv.innerHTML = `
-            <div style="position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.9);color:#0f0;text-align:left;padding:15px;z-index:1000;font-family:'Courier New',monospace;border-top:2px solid #0f0;box-shadow:0 0 20px #0f0;">
-                <p style="margin:0;font-size:14px;line-height:1.5;">
-                    <span style="color:#f0f;">root@cyberdeck:~$</span> ./suggest_action.sh<br>
-                    <span style="color:#0ff;">For optimal experience, rotate device to landscape mode</span>
-                </p>
-                <button onclick="dismissMobileWarning()" style="background:#000;color:#0f0;border:1px solid #0f0;padding:5px 10px;margin-top:10px;cursor:pointer;font-family:'Courier New',monospace;font-size:12px;">
-                    <span style="color:#f0f;">$</span> ./acknowledge
-                </button>
+            <div style="position:fixed;top:0;left:0;right:0;background:rgba(0,0,0,0.9);color:#33ff33;text-align:center;padding:15px;z-index:1000;font-family:'JetBrains Mono',monospace;border-bottom:2px solid #33ff33;box-shadow:0 0 10px #33ff33;">
+                <p style="margin:0;font-size:14px;">$ echo "Use desktop for better view"</p>
+                <button onclick="this.parentElement.style.display='none'" style="background: linear-gradient(45deg, #33ff33, #00cc00); color: #000; border: none; padding: 8px 15px; margin-top: 10px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: bold; text-transform: uppercase; border-radius: 5px; box-shadow: 0 0 10px rgba(51, 255, 51, 0.5); transition: all 0.3s ease;">$ close</button>
             </div>
         `;
         document.body.appendChild(warningDiv);
     }
-}
-
-function dismissMobileWarning() {
-    document.getElementById('mobile-warning').style.display = 'none';
-    localStorage.setItem('mobileWarningDismissed', 'true');
 }
 
 window.onerror = function(message, url, line, col, error) {
@@ -78,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showLoadAnimation(async () => window.open(await fetchData('resume'), "_blank"));
                 break;
             case 'cert':
-                loopLines(await fetchData('cert'), 'color2 margin');
+                loopLines(cert, 'color2 margin');
                 break;
             case 'projects':
                 loopLines(await fetchData('projects'), 'color2 margin');
@@ -165,6 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return instagram;
             case 'facebook':
                 return facebook;
+            case 'cert':
+                return cert;
             default:
                 return `Data for ${key} not found`;
         }
