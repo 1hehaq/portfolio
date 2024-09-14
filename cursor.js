@@ -65,7 +65,9 @@ function updateCursorPosition() {
     const inputStyle = window.getComputedStyle(commandInput);
     const letterWidth = parseFloat(inputStyle.fontSize) * 0.6;
     const cursorLeft = inputRect.left + (commandInput.selectionStart * letterWidth);
+    const cursorTop = inputRect.top + (inputRect.height - parseFloat(inputStyle.fontSize)) / 2;
     cursor.style.left = `${cursorLeft}px`;
+    cursor.style.top = `${cursorTop}px`;
 }
 
 function handleKeyDown(e) {
