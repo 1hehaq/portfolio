@@ -103,7 +103,7 @@ systemctl = [
 
 projects = [
     "<br>",
-    '<span class="social-link" style="color: #6e5494; font-weight: bold; font-size: 1.2em; text-shadow: 0 0 5px #6e5494; cursor: pointer;" onclick="window.open(\'' + github + '\', \'_blank\')"><box-icon type=\'logo\' name=\'github\' color="#6e5494"></box-icon><span class="social-link-text">Click me to explore my GitHub Projects</span></span>',
+    '<span class="social-link" style="color: #6e5494; font-weight: bold; font-size: 1.2em; text-shadow: 0 0 5px #6e5494; cursor: pointer;" onclick="window.open(\'' + github + '\', \'_blank\')"><box-icon type=\'logo\' name=\'github\' color="#6e5494"></box-icon><span class="social-link-text">Click to Explore my GitHub Projects</span></span>',
     "<br>"
 ];
 
@@ -124,7 +124,8 @@ help = [
 ];
 
 banner = [
-    '<span id="welcome-message" class="subtitle">Welcome to my Portfolio - Mohammed Misbahul Haq</span>',
+    '<span id="welcome-message" class="subtitle">"Security is not a product, but a process."</span>',
+    '<span id="welcome-message" class="subtitle" style="font-size: 1.1em;"><br><span style="margin-left: 350px;">~ Mohammed Misbahul Haq</span></span>',
     "<br>",
     'Type <span class="highlight">help</span> command to reveal a list of available commands.',
     'The cursor is waiting for your input.',
@@ -138,8 +139,9 @@ function openResume() {
 function showCertificates() {
     return [
         "<br>",
-        "Certificates are currently being updated.",
-        "Check back soon for a list of my certifications!",
+        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://app.kajabi.com/certificates/99a049a9\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#FF5722"></box-icon><span class="social-link-text" style="color: white;">C3SA Premium Edition</span></span>',
+        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/9f6a3d44-80e0-4f5e-b3e0-3529f8eb79a9\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#2196F3"></box-icon><span class="social-link-text" style="color: white;">Cisco Cybersecurity</span></span>',
+        '<span class="social-link" style="cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/3b779d77-0502-4ef9-be72-0829e7369e9b\', \'_blank\')"><box-icon name=\'book-bookmark\' color="#9C27B0"></box-icon><span class="social-link-text" style="color: white;">ISC2 Candidate</span></span>',
         "<br>"
     ];
 }
