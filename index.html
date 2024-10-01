@@ -2,30 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Haq - Terminal Portfolio</title>
-    <link rel="icon" href="logo.jpg" type="image/png">
+    <link rel="icon" href="saturn.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preload" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" as="style">
     <link rel="preload" href="main.js" as="script">
     <link rel="preload" href="commands.js" as="script">
     <link rel="preload" href="cursor.js" as="script">
-    <meta name="description" content="Mohammed Misbahul Haq - Ethical Hacker and Web Developer Portfolio">
+    <meta name="description" content="Mohammed Misbahul Haq - Security Researcher and Web Developer Portfolio">
     <meta name="keywords" content="ethical hacking, web development, cybersecurity, portfolio, bug bounty hunter, Security Researcher">
-    <meta property="og:title" content="Haq's Cybersecurity Terminal">
+    <meta property="og:title" content="Haq's saturn Terminal">
     <meta property="og:description" content="Explore the digital realm of an ethical hacker and web developer">
     <meta property="og:image" content="https://1hehaq.me">
     <meta property="og:url" content="https://1hehaq.github.io/">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="manifest" href="/manifest.json">
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
-      }
-    </script>
 </head>
 <body>
+    <div id="starfield"></div>
+    <div id="saturn"></div>
     <div id="terminal">
         <header id="terminal-header">
             <div class="terminal-button close"></div>
@@ -33,9 +29,9 @@
             <div class="terminal-button maximize"></div>
             <span class="terminal-title" style="text-align: center; display: block;">Mohammed Misbahul Haq - Terminal Portfolio</span>
             <span class="terminal-subtitle">Change Mode</span>
-            <button id="theme-toggle" aria-label="Toggle light/dark mode">☀️</button>
+            <button id="theme-toggle" aria-label="Toggle light/dark mode"><i class='bx bxs-sun'></i></button>
         </header>
-        <main id="terminal-content">
+        <main id="terminal-content" tabindex="0">
             <div id="output"></div>
             <div id="input-line">
                 <span id="prompt">haq@portfolio:~$</span>
@@ -43,10 +39,9 @@
             </div>
         </main>
     </div>
+    <div class="cursor"></div>
     <script src="main.js"></script>
     <script src="commands.js"></script>
-    <script src="cursor.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <script async defer data-website-id="YOUR-WEBSITE-ID" src="https://analytics.example.com/umami.js"></script>
 </body>
 </html>
