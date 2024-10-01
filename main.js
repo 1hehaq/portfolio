@@ -1,23 +1,8 @@
-function showMobileWarning() {
-    if (window.innerWidth <= 768) {
-        const warningDiv = document.createElement('div');
-        warningDiv.id = 'mobile-warning';
-        warningDiv.innerHTML = `
-            <div style="position:fixed;top:0;left:0;right:0;background:rgba(0,0,0,0.9);color:#33ff33;text-align:center;padding:15px;z-index:1000;font-family:'JetBrains Mono',monospace;border-bottom:2px solid #33ff33;box-shadow:0 0 10px #33ff33;">
-                <p style="margin:0;font-size:14px;">$ echo "Use desktop for better view"</p>
-                <button onclick="this.parentElement.style.display='none'" style="background: linear-gradient(45deg, #33ff33, #00cc00); color: #000; border: none; padding: 8px 15px; margin-top: 10px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: bold; text-transform: uppercase; border-radius: 5px; box-shadow: 0 0 10px rgba(51, 255, 51, 0.5); transition: all 0.3s ease;">$ close</button>
-            </div>
-        `;
-        document.body.appendChild(warningDiv);
-    }
-}
-
 window.onerror = function(message, url, line, col, error) {
     console.error("Error:", message, url, line, col, error);
   };
 
 document.addEventListener('DOMContentLoaded', () => {
-    showMobileWarning();
     const output = document.getElementById('output');
     const commandInput = document.getElementById('command-input');
     const prompt = document.getElementById('prompt');
@@ -26,6 +11,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let commandHistory = [];
     let historyIndex = -1;
     let commands = ['help', 'whoami', 'social', 'resume', 'cv', 'cert', 'projects', 'systemctl', 'email', 'banner', 'clear', 'history', 'linkedin', 'twitter', 'instagram', 'github', 'facebook'];
+
+    function scrollToBottom() {
+        const terminalContent = document.getElementById('terminal-content');
+        terminalContent.scrollTop = terminalContent.scrollHeight;
+    }
+
+    function smoothScrollToBottom() {
+        const terminalContent = document.getElementById('terminal-content');
+        const targetScrollTop = terminalContent.scrollHeight - terminalContent.clientHeight;
+        const startScrollTop = terminalContent.scrollTop;
+        const distance = targetScrollTop - startScrollTop;
+        const duration = 300;
+        let start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            const percentage = Math.min(progress / duration, 1);
+            terminalContent.scrollTop = startScrollTop + distance * easeOutCubic(percentage);
+            if (progress < duration) {
+                window.requestAnimationFrame(step);
+            }
+        }
+
+        window.requestAnimationFrame(step);
+    }
+
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
 
     function addLine(text, style = '') {
         const line = document.createElement('p');
@@ -45,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         output.appendChild(line);
         
-        output.scrollTop = output.scrollHeight;
+        smoothScrollToBottom();
     }
 
     async function executeCommand(cmd) {
@@ -104,11 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     addLine(`Command not found: ${cmd}. Type 'help' for available commands.`, 'error');
                 }
         }
+
+        smoothScrollToBottom();
+    }
+
+    function ensureScrolled() {
+        requestAnimationFrame(scrollToBottom);
     }
 
     function loopLines(lines, style) {
         lines.forEach((line, index) => {
-            setTimeout(() => addLine(line, style), index * 50);
+            setTimeout(() => {
+                addLine(line, style);
+                if (index === lines.length - 1) {
+                    smoothScrollToBottom();
+                }
+            }, index * 50);
         });
     }
 
@@ -128,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(loadInterval);
             loadingElement.remove();
             callback();
+            smoothScrollToBottom();
         }, 2000);
     }
 
@@ -160,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             default:
                 return `Data for ${key} not found`;
         }
+        ensureScrolled();
     }
 
     function autocomplete(input) {
@@ -194,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             executeCommand(command);
             commandInput.value = '';
             commandInput.setAttribute('placeholder', '');
+            smoothScrollToBottom();
         } else if (e.key === 'ArrowUp') {
             if (historyIndex > 0) {
                 historyIndex--;
@@ -212,11 +241,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('light-mode');
-        themeToggle.textContent = document.body.classList.contains('light-mode') ? '🌙' : '☀️';
+        themeToggle.innerHTML = document.body.classList.contains('light-mode') ? '<i class="bx bxs-moon"></i>' : '<i class="bx bxs-sun"></i>';
     });
 
     loopLines(banner, "");
     initParticleBackground();
+
+    const cursor = document.querySelector('.cursor');
+    const links = document.querySelectorAll('a, button, input, .social-link, #theme-toggle');
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mousedown', () => {
+        cursor.classList.add('expand');
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.classList.remove('expand');
+    });
+
+    links.forEach(link => {
+        link.addEventListener('mouseover', () => {
+            cursor.classList.add('hover');
+        });
+        link.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hover');
+        });
+    });
+
+    window.addEventListener('resize', ensureScrolled);
+
 });
 
 function initParticleBackground() {
@@ -229,23 +286,24 @@ function initParticleBackground() {
     canvas.height = window.innerHeight;
 
     const particlesArray = [];
-    let hue = 0;
+    const colors = ['#e7cfaa', '#a19274', '#9e816e', '#938074']; 
 
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 5 + 1;
-            this.speedX = Math.random() * 3 - 1.5;
-            this.speedY = Math.random() * 3 - 1.5;
+            this.size = Math.random() * 3 + 1; 
+            this.speedX = Math.random() * 2 - 1;
+            this.speedY = Math.random() * 2 - 1;
+            this.color = colors[Math.floor(Math.random() * colors.length)];
         }
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-            if (this.size > 0.2) this.size -= 0.1;
+            if (this.size > 0.2) this.size -= 0.05;
         }
         draw() {
-            ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+            ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
@@ -256,7 +314,7 @@ function initParticleBackground() {
         for (let i = 0; i < particlesArray.length; i++) {
             particlesArray[i].update();
             particlesArray[i].draw();
-            if (particlesArray[i].size <= 0.3) {
+            if (particlesArray[i].size <= 0.2) {
                 particlesArray.splice(i, 1);
                 i--;
             }
@@ -265,11 +323,10 @@ function initParticleBackground() {
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (Math.random() < 0.1) {
+        if (Math.random() < 0.05) { 
             particlesArray.push(new Particle());
         }
         handleParticles();
-        hue += 0.5;
         requestAnimationFrame(animate);
     }
 
@@ -282,3 +339,103 @@ function initParticleBackground() {
 
     window.addEventListener('resize', showMobileWarning);
 }
+
+function createAsteroids() {
+    const asteroidCount = 50; 
+    const container = document.body;
+
+    for (let i = 0; i < asteroidCount; i++) {
+        const asteroid = document.createElement('div');
+        asteroid.classList.add('asteroid');
+        
+        const size = Math.random() * 5 + 2;
+        asteroid.style.width = `${size}px`;
+        asteroid.style.height = `${size}px`;
+        
+        asteroid.style.left = `${Math.random() * 100}%`;
+        asteroid.style.top = `${Math.random() * 100}%`;
+        
+        asteroid.style.animation = `float ${15 + Math.random() * 25}s linear infinite`;
+        asteroid.style.animationDelay = `${Math.random() * 10}s`;
+        
+        container.appendChild(asteroid);
+    }
+}
+
+function createStarfield() {
+    const starfieldContainer = document.createElement('div');
+    starfieldContainer.id = 'starfield';
+    document.body.appendChild(starfieldContainer);
+
+    for (let i = 0; i < 200; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDuration = `${3 + Math.random() * 7}s`;
+        star.style.animationDelay = `${Math.random() * 2}s`;
+        starfieldContainer.appendChild(star);
+    }
+}
+
+function enhanceSaturn() {
+    let saturn = document.getElementById('saturn');
+    if (!saturn) {
+        saturn = document.createElement('div');
+        saturn.id = 'saturn';
+        document.body.appendChild(saturn);
+    }
+    saturn.style.filter = 'drop-shadow(0 0 20px rgba(231, 207, 170, 0.7))';
+    saturn.style.transform = 'scale(1.2)';
+}
+
+window.addEventListener('load', () => {
+    createStarfield();
+    createAsteroids();
+    enhanceSaturn();
+    floatAsteroids();
+});
+
+function floatAsteroids() {
+    const asteroids = document.querySelectorAll('.asteroid');
+    asteroids.forEach(asteroid => {
+        setInterval(() => {
+            asteroid.style.transform = `translate(${Math.sin(Date.now() / 1000) * 10}px, ${Math.cos(Date.now() / 1000) * 10}px)`;
+        }, 50);
+    });
+}
+
+window.addEventListener('load', () => {
+    createStarfield();
+    createAsteroids();
+    enhanceSaturn();
+    floatAsteroids();
+});
+
+window.addEventListener('load', initParticleBackground);
+
+function adjustBackgroundElements() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const area = width * height;
+    
+    const particleCount = Math.floor(area / 10000);
+    const starCount = Math.floor(area / 5000);
+    
+}
+
+window.addEventListener('load', adjustBackgroundElements);
+window.addEventListener('resize', adjustBackgroundElements);
+
+function handleTouchDevice() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.querySelector('.cursor').style.display = 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', handleTouchDevice);
+
+window.addEventListener('resize', smoothScrollToBottom);
