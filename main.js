@@ -430,6 +430,16 @@ function adjustBackgroundElements() {
 window.addEventListener('load', adjustBackgroundElements);
 window.addEventListener('resize', adjustBackgroundElements);
 
+function showMobileWarning() {
+    if (window.innerWidth <= 768) {
+    } else {
+        const existingWarning = document.getElementById('mobile-warning');
+        if (existingWarning) {
+            existingWarning.remove();
+        }
+    }
+}
+
 function handleTouchDevice() {
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
         document.querySelector('.cursor').style.display = 'none';
