@@ -1,4 +1,4 @@
-var email = "mailto:1hehaq@gmail.com";
+var email = "<a href='mailto:1hehaq@gmail.com' style='color: inherit; text-decoration: none;'>1hehaq@gmail.com</a>";
 var twitter = "https://x.com/1hehaq/";
 var linkedin = "https://www.linkedin.com/in/1hehaq";
 var instagram = "https://www.instagram.com/1hehaq";
@@ -74,13 +74,13 @@ whoami = [
 
 social = [
     "<br>",
-    "<span style='color: #33f8ff;'>Connect with me on social media!</span>",
+    "<span class='social-header'>Social!</span>",
     "<div class='social-links-container'>",
-    `<span class="social-link" style="color: #E1306C; cursor: pointer;" onclick="window.open('${instagram}', '_blank')"><box-icon name='instagram' type='logo' color="#E1306C"></box-icon><span class="social-link-text">Instagram: @1hehaq</span></span>`,
-    `<span class="social-link" style="color: #1DA1F2; cursor: pointer;" onclick="window.open('${twitter}', '_blank')"><box-icon name='twitter' type='logo' color="#1DA1F2"></box-icon><span class="social-link-text">Twitter: @1hehaq</span></span>`,
-    `<span class="social-link" style="color: #0077B5; cursor: pointer;" onclick="window.open('${linkedin}', '_blank')"><box-icon name='linkedin-square' type='logo' color="#0077B5"></box-icon><span class="social-link-text">LinkedIn: @1hehaq</span></span>`,
-    `<span class="social-link" style="color: #6e5494; cursor: pointer;" onclick="window.open('${github}', '_blank')"><box-icon name='github' type='logo' color="#6e5494"></box-icon><span class="social-link-text">GitHub: @1hehaq</span></span>`,
-    `<span class="social-link" style="color: #4267B2; cursor: pointer;" onclick="window.open('${facebook}', '_blank')"><box-icon type='logo' name='facebook-square' color="#4267B2"></box-icon><span class="social-link-text">Facebook: @1hehaq</span></span>`,
+    `<span class="social-link" onclick="window.open('${instagram}', '_blank')"><box-icon name='instagram' type='logo' color="#E1306C"></box-icon><span class="social-link-text">Instagram: @1hehaq</span></span>`,
+    `<span class="social-link" onclick="window.open('${twitter}', '_blank')"><box-icon name='twitter' type='logo' color="#1DA1F2"></box-icon><span class="social-link-text">Twitter: @1hehaq</span></span>`,
+    `<span class="social-link" onclick="window.open('${linkedin}', '_blank')"><box-icon name='linkedin-square' type='logo' color="#0077B5"></box-icon><span class="social-link-text">LinkedIn: @1hehaq</span></span>`,
+    `<span class="social-link" onclick="window.open('${github}', '_blank')"><box-icon name='github' type='logo' color="#6e5494"></box-icon><span class="social-link-text">GitHub: @1hehaq</span></span>`,
+    `<span class="social-link" onclick="window.open('${facebook}', '_blank')"><box-icon type='logo' name='facebook-square' color="#4267B2"></box-icon><span class="social-link-text">Facebook: @1hehaq</span></span>`,
     "</div>",
     "<br>"
 ];
@@ -90,7 +90,7 @@ systemctl = [
     "Update: As of September 2024",
     "────────────────────────────",
     "<br>",
-    " • Developing an all-in-one application for all the Security Researchers.",
+    " • Developing an all-in-one mobile application using flutter for all the Security Researchers.",
     " • Contributing my custom security tools written in Bash and Python to open-source communities.",
     " • Leveraging my web application testing experience, I'm excited to expand my skill set into App Sec.",
     "<br>",
@@ -104,6 +104,18 @@ systemctl = [
 projects = [
     "<br>",
     '<span class="social-link" style="color: #6e5494; font-weight: bold; font-size: 1.2em; text-shadow: 0 0 5px #6e5494; cursor: pointer;" onclick="window.open(\'' + github + '\', \'_blank\')"><box-icon type=\'logo\' name=\'github\' color="#6e5494"></box-icon><span class="social-link-text">Click to Explore my GitHub Projects</span></span>',
+    "<br>",
+    "Featured Project: Loxs - Multi Vulnerability Scanner",
+    "   - A comprehensive web application vulnerability scanner",
+    "   - Detects LFI, Open Redirection, SQL Injection, and XSS vulnerabilities",
+    "   - Features:",
+    "     • Multi-threaded scanning for improved performance",
+    "     • Customizable payloads and success criteria",
+    "     • User-friendly CLI interface",
+    "     • HTML report generation with Telegram sharing",
+    "   - Technologies: Python, Selenium, BeautifulSoup, Flask",
+    "   - Contributors: AnonKryptiQuz, Coffinxp, HexShad0w, Naho, 1hehaq",
+    "   - GitHub: https://github.com/1hehaq/loxs",
     "<br>"
 ];
 
@@ -124,8 +136,8 @@ help = [
 ];
 
 banner = [
-    '<span id="welcome-message" class="subtitle">"Security is not a product, but a process."</span>',
-    '<span id="welcome-message" class="subtitle" style="font-size: 1.1em;"><br><span style="margin-left: 350px;">~ Mohammed Misbahul Haq</span></span>',
+    '<span id="welcome-message" class="subtitle">Are you looking for a 12th grader!?</span>',
+    '<span id="welcome-message" class="subtitle" style="font-size: 1.1em;"><br><span style="margin-left: 250px;">~ Mohammed Misbahul Haq</span></span>',
     "<br>",
     'Type <span class="highlight">help</span> command to reveal a list of available commands.',
     'The cursor is waiting for your input.',
@@ -138,9 +150,9 @@ function openResume() {
 
 cert = [
     "<br>",
-    '<span class="social-link" style="color: #4CAF50; cursor: pointer;" onclick="window.open(\'https://app.kajabi.com/certificates/99a049a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#4CAF50"></box-icon><span class="social-link-text" style="color: white;">C3SA Premium Edition</span></span>',
-    '<span class="social-link" style="color: #2196F3; cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/9f6a3d44-80e0-4f5e-b3e0-3529f8eb79a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#2196F3"></box-icon><span class="social-link-text" style="color: white;">Cisco Cybersecurity</span></span>',
-    '<span class="social-link" style="color: #FFC107; cursor: pointer;" onclick="window.open(\'https://www.credly.com/badges/3b779d77-0502-4ef9-be72-0829e7369e9b\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#FFC107"></box-icon><span class="social-link-text" style="color: white;">ISC2 Candidate</span></span>',
+    '<span class="social-link" onclick="window.open(\'https://app.kajabi.com/certificates/99a049a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#4CAF50"></box-icon><span class="social-link-text">C3SA Premium Edition</span></span>',
+    '<span class="social-link" onclick="window.open(\'https://www.credly.com/badges/9f6a3d44-80e0-4f5e-b3e0-3529f8eb79a9\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#2196F3"></box-icon><span class="social-link-text">Cisco Cybersecurity</span></span>',
+    '<span class="social-link" onclick="window.open(\'https://www.credly.com/badges/3b779d77-0502-4ef9-be72-0829e7369e9b\', \'_blank\')"><box-icon name=\'bookmark-alt\' type=\'solid\' color="#FFC107"></box-icon><span class="social-link-text">ISC2 Candidate</span></span>',
     "<br>"
 ];
 
